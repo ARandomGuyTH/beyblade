@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bk4mt8psvawm3"]
+
+[ext_resource type="PackedScene" uid="uid://bmr16q5pl6waa" path="res://assets/stadium/stadium.fbx" id="1_5xg5f"]
+[ext_resource type="Shader" uid="uid://b2pgtl1ebgka7" path="res://shaders/clearPlastic.gdshader" id="2_lwmfl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdk54"]
+render_priority = 0
+shader = ExtResource("2_lwmfl")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+
+[node name="stadium" unique_id=747945164 instance=ExtResource("1_5xg5f")]
+
+[node name="Sphere_001" parent="." index="1" unique_id=1943109929]
+surface_material_override/0 = SubResource("ShaderMaterial_qdk54")

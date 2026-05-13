@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://drsv8urckdgwy"]
+
+[ext_resource type="PackedScene" uid="uid://6cgfwp311blx" path="res://scenes/Stadium/StaticStadium.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://ddim1dvt0faqx" path="res://scenes/beyblade/beybladeRigid.tscn" id="3_lbhrr"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_yqjtg"]
+ground_color = Color(0.7828772, 0.71498626, 0.6667932, 1)
+
+[sub_resource type="Sky" id="Sky_yqjtg"]
+sky_material = SubResource("PhysicalSkyMaterial_yqjtg")
+
+[sub_resource type="Environment" id="Environment_yqjtg"]
+background_mode = 2
+sky = SubResource("Sky_yqjtg")
+ambient_light_sky_contribution = 0.1
+tonemap_mode = 1
+volumetric_fog_density = 0.01
+volumetric_fog_length = 256.0
+volumetric_fog_sky_affect = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_yqjtg"]
+
+[node name="Game" type="Node3D" unique_id=1097593284]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=359013382]
+transform = Transform3D(0.999911, -0.011795821, 0.006230011, 0.0022621595, 0.6101903, 0.7922517, -0.013146751, -0.7921671, 0.6101626, 0, 33.898296, 36.08092)
+fov = 90.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=111366632]
+transform = Transform3D(1, 0, 0, 0, 0.4786918, 0.877983, 0, -0.877983, 0.4786918, 0, 24.181253, 8.036207)
+light_color = Color(1, 0.9607843, 0.8901961, 1)
+shadow_enabled = true
+shadow_blur = 0.1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=944602195]
+environment = SubResource("Environment_yqjtg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=982072036]
+transform = Transform3D(100, 0, 0, 0, 7.539365, 0, 0, 0, 300, 0, -54.740112, 0)
+mesh = SubResource("BoxMesh_yqjtg")
+
+[node name="BeybladeRigid" parent="." unique_id=1487340640 instance=ExtResource("3_lbhrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.912396, 23.481245)
+
+[node name="StaticStadium" parent="." unique_id=1357502855 instance=ExtResource("2_yqjtg")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+
+[node name="BeybladeRigid2" parent="." unique_id=2107056818 instance=ExtResource("3_lbhrr")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.2757554, -22.826082)
+coefficientFriction = 0.5
+drag = 1.0
+collisionForceScale = 1.0
