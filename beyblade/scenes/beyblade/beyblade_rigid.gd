@@ -116,7 +116,7 @@ func _ready() -> void:
 	connect("body_entered", _on_body_entered)
 	# Lock Y-position slightly to keep blade on floor plane
 	axis_lock_linear_y = false  # let gravity work naturally
-	linear_velocity = 30*(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized() - global_position.normalized())
+	linear_velocity = -40* global_position.normalized() + 5*(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized()) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

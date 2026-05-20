@@ -10,8 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://vf0c6d1lldq0" path="res://assets/T_circle42.PNG" id="6_jprnu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvyue"]
-friction = 0.05
-bounce = 0.5
+friction = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eu2xk"]
 radius = 1.1811523
@@ -93,9 +92,8 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_lvyue")
 spinDecay = 50.0
-drag = 0.25
-wobble = 0.2
-propulsion_strength = 3500.0
+collisionForceScale = 3.0
+propulsion_strength = 5000.0
 
 [node name="beyblade" parent="." unique_id=1068453274 groups=["beyblade"] instance=ExtResource("2_q35t8")]
 
@@ -139,7 +137,7 @@ draw_pass_1 = SubResource("QuadMesh_60aai")
 script = ExtResource("6_arycd")
 
 [node name="collision cooldown" type="Timer" parent="." unique_id=597024321]
-wait_time = 0.25
+wait_time = 0.05
 one_shot = true
 
 [connection signal="timeout" from="collision cooldown" to="." method="_on_collision_cooldown_timeout"]
