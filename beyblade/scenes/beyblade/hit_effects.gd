@@ -9,4 +9,4 @@ func _ready() -> void:
 
 func activate_effects(pos : Vector3):
 	for effect in effects:
-		effect.activate()
+		effect.activate(pos)

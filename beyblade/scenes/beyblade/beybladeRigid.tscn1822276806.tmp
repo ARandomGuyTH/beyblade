@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://vf0c6d1lldq0" path="res://assets/T_circle42.PNG" id="6_jprnu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvyue"]
-friction = 0.05
+friction = 0.1
 bounce = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eu2xk"]
@@ -18,7 +18,7 @@ radius = 1.1811523
 height = 3.1656494
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yp6vj"]
-height = 2.577748
+height = 1.6769805
 radius = 4.572754
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yp6vj"]
@@ -93,9 +93,9 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_lvyue")
 spinDecay = 50.0
-drag = 0.25
-wobble = 0.2
-propulsion_strength = 3500.0
+coefficientFriction = 0.1
+drag = 0.1
+collisionForceScale = 5.0
 
 [node name="beyblade" parent="." unique_id=1068453274 groups=["beyblade"] instance=ExtResource("2_q35t8")]
 
@@ -104,7 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7262573, 0)
 shape = SubResource("CapsuleShape3D_eu2xk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1919846855 groups=["beyblade"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.41594815, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03443563, 0)
 shape = SubResource("CylinderShape3D_yp6vj")
 
 [node name="groundRay" type="RayCast3D" parent="." unique_id=192276087]
@@ -137,11 +137,5 @@ explosiveness = 0.91
 process_material = SubResource("ParticleProcessMaterial_4yshp")
 draw_pass_1 = SubResource("QuadMesh_60aai")
 script = ExtResource("6_arycd")
-
-[node name="collision cooldown" type="Timer" parent="." unique_id=597024321]
-wait_time = 0.25
-one_shot = true
-
-[connection signal="timeout" from="collision cooldown" to="." method="_on_collision_cooldown_timeout"]
 
 [editable path="beyblade"]
