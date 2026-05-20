@@ -2,16 +2,87 @@
 
 [ext_resource type="Script" uid="uid://c45dfuqheumx8" path="res://scenes/beyblade/beyblade_rigid.gd" id="1_lvyue"]
 [ext_resource type="PackedScene" uid="uid://chkabl2qku3im" path="res://scenes/beyblade/beyblade.tscn" id="2_q35t8"]
+[ext_resource type="Script" uid="uid://btgo53gy7j3av" path="res://scenes/beyblade/hit_effects.gd" id="3_jprnu"]
+[ext_resource type="Shader" uid="uid://ewacbr70ma1" path="res://shaders/simple_shader.tres" id="3_q35t8"]
+[ext_resource type="Texture2D" uid="uid://c4otfcbihnp22" path="res://assets/T_flare81.png" id="4_yp6vj"]
+[ext_resource type="Shader" uid="uid://dovyba75bt3kp" path="res://shaders/simple_shader2.tres" id="5_cxbsj"]
+[ext_resource type="Script" uid="uid://bv46i2k88tjsu" path="res://scenes/beyblade/hit_effect.gd" id="6_arycd"]
+[ext_resource type="Texture2D" uid="uid://vf0c6d1lldq0" path="res://assets/T_circle42.PNG" id="6_jprnu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvyue"]
+bounce = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eu2xk"]
 radius = 1.1811523
 height = 3.1656494
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yp6vj"]
-height = 1.4304922
+height = 1.6769805
 radius = 4.572754
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yp6vj"]
+render_priority = 0
+shader = ExtResource("3_q35t8")
+shader_parameter/Hit_texture = ExtResource("4_yp6vj")
+
+[sub_resource type="Curve" id="Curve_arycd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gqola"]
+curve = SubResource("Curve_arycd")
+
+[sub_resource type="Gradient" id="Gradient_gcats"]
+colors = PackedColorArray(8, 0.8, 0.2, 1, 1, 0.5, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_35ila"]
+gradient = SubResource("Gradient_gcats")
+
+[sub_resource type="Curve" id="Curve_eu2xk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cxbsj"]
+curve = SubResource("Curve_eu2xk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eu2xk"]
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_cxbsj")
+color_ramp = SubResource("GradientTexture1D_35ila")
+alpha_curve = SubResource("CurveTexture_gqola")
+
+[sub_resource type="QuadMesh" id="QuadMesh_cxbsj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_er1da"]
+render_priority = 0
+shader = ExtResource("5_cxbsj")
+shader_parameter/Hit_texture = ExtResource("6_jprnu")
+
+[sub_resource type="Curve" id="Curve_gqola"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gcats"]
+curve = SubResource("Curve_gqola")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4yshp"]
+particle_flag_align_y = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.5
+color = Color(2.5, 2, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_gcats")
+
+[sub_resource type="QuadMesh" id="QuadMesh_60aai"]
+size = Vector2(0.5, 3)
 
 [node name="BeybladeRigid" type="RigidBody3D" unique_id=1487340640 groups=["beyblade"]]
 physics_material_override = SubResource("PhysicsMaterial_lvyue")
@@ -21,7 +92,7 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_lvyue")
 spinDecay = 50.0
-collisionForceScale = 10.0
+collisionForceScale = 5.0
 
 [node name="beyblade" parent="." unique_id=1068453274 groups=["beyblade"] instance=ExtResource("2_q35t8")]
 
@@ -30,11 +101,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7262573, 0)
 shape = SubResource("CapsuleShape3D_eu2xk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1919846855 groups=["beyblade"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08880854, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03443563, 0)
 shape = SubResource("CylinderShape3D_yp6vj")
 
 [node name="groundRay" type="RayCast3D" parent="." unique_id=192276087]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7576096, 0)
 
 [node name="topRay" type="RayCast3D" parent="." unique_id=1164191192]
-transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0.18388498, 0)
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0.5623239, 0)
+
+[node name="hit effects" type="Node3D" parent="." unique_id=2140475410]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+script = ExtResource("3_jprnu")
+
+[node name="Hit Effect" type="GPUParticles3D" parent="hit effects" unique_id=1324355582]
+material_override = SubResource("ShaderMaterial_yp6vj")
+emitting = false
+amount = 1
+lifetime = 0.25
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eu2xk")
+draw_pass_1 = SubResource("QuadMesh_cxbsj")
+script = ExtResource("6_arycd")
+
+[node name="Sparks" type="GPUParticles3D" parent="hit effects" unique_id=15065225]
+material_override = SubResource("ShaderMaterial_er1da")
+emitting = false
+amount = 15
+lifetime = 0.1
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_4yshp")
+draw_pass_1 = SubResource("QuadMesh_60aai")
+script = ExtResource("6_arycd")
+
+[editable path="beyblade"]

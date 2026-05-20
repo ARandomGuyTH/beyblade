@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp6516o66bygh"
-path.s3tc="res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
+uid="uid://c7v0odpmp7ht6"
+path.s3tc="res://.godot/imported/beyblade_blue.png-7f9a0e097ef459137c913427bc3fc5ef.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "a18b9cfc794850f6f4aff81aeb4c7219"
+}
 
 [deps]
 
-source_file="res://icon.svg"
-dest_files=["res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"]
+source_file="res://assets/beyblade/beyblade_blue.png"
+dest_files=["res://.godot/imported/beyblade_blue.png-7f9a0e097ef459137c913427bc3fc5ef.s3tc.ctex"]
 
 [params]
 
@@ -39,6 +42,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -18,6 +18,7 @@ const  GRAVITY := Vector3(0, -9.8, 0)
 
 var isFlipped : bool = false
 var spin_speed: float = maxSpin
+var lost : bool = false
 
 func apply_gyroscopic_torque(delta: float) -> void:
 	var spin_axis := basis.y  # local up = spin axis
@@ -35,7 +36,7 @@ func decay_spin(delta: float) -> void:
 	angular_velocity = angular_velocity.lerp(target_av, 0.15)
 
 func apply_wobble_torque(delta: float) -> void:
-	if spin_speed < 1.0 || not groundRay.is_colliding():
+	if not groundRay.is_colliding():
 		return
 		
 	# Wobble grows as spin weakens
@@ -75,9 +76,10 @@ func _on_body_entered(body: Node) -> void:
 	var other := body as Beyblade
 	var impact = (other.global_position - global_position).normalized()
 	var relative_spin = spin_speed - other.spin_speed
+	var relative_vel = linear_velocity.length()- other.linear_velocity.length()
 
 	# Faster spinner transfers momentum and pushes the other away
-	var knockback : Vector3 = impact * relative_spin * collisionForceScale
+	var knockback : Vector3 = impact * max(relative_spin, 0) * collisionForceScale * max(relative_vel, 0) * mass
 	other.apply_central_impulse(knockback/other.mass)
 	other.spin_speed -= spinLossHitCoefficient
 
@@ -87,7 +89,7 @@ func _ready() -> void:
 	connect("body_entered", _on_body_entered)
 	# Lock Y-position slightly to keep blade on floor plane
 	axis_lock_linear_y = false  # let gravity work naturally
-	linear_velocity = 10*(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized() - global_position.normalized())
+	linear_velocity = 25*(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized() - global_position.normalized())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -96,14 +98,17 @@ func _process(delta: float) -> void:
 	#print(touchingFloor.global_position.y)
 		
 func _physics_process(delta: float) -> void:
-	if spin_speed <= 0.0:
+	if spin_speed <= 0.5:
 		# Blade has stopped — let it fall over naturally
-		pass
+		if !lost:
+			lost = true
+			print(name)
 	
-	linear_velocity -= global_position.normalized() * delta * 3 #apply small force to the centre of the stadium
+	else:
+		apply_force(-global_position.normalized() * delta * 750) #apply small force to the centre of the stadium
 
-		
-	decay_spin(delta)
-	apply_gyroscopic_torque(delta)
-	apply_wobble_torque(delta)
-	apply_floor_friction(delta)
+			
+		decay_spin(delta)
+		apply_gyroscopic_torque(delta)
+		apply_wobble_torque(delta)
+		apply_floor_friction(delta)

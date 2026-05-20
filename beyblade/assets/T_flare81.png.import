@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7v0odpmp7ht6"
-path.s3tc="res://.godot/imported/beyblade_0.png-f68db1a3e1dbc51be3b61298a422d800.s3tc.ctex"
+uid="uid://c4otfcbihnp22"
+path.s3tc="res://.godot/imported/T_flare81.png-251fbe49952fc98166fefe4dd7540842.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "a18b9cfc794850f6f4aff81aeb4c7219"
-}
 
 [deps]
 
-source_file="res://assets/beyblade/beyblade_0.png"
-dest_files=["res://.godot/imported/beyblade_0.png-f68db1a3e1dbc51be3b61298a422d800.s3tc.ctex"]
+source_file="res://assets/T_flare81.png"
+dest_files=["res://.godot/imported/T_flare81.png-251fbe49952fc98166fefe4dd7540842.s3tc.ctex"]
 
 [params]
 
