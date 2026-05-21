@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://drsv8urckdgwy"]
 
+[ext_resource type="Script" uid="uid://fnbr262hiare" path="res://scenes/camera_3d.gd" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://3tj6ju0c2r5o" path="res://assets/beyblade/beyblade_red.png" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://6cgfwp311blx" path="res://scenes/Stadium/StaticStadium.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://ddim1dvt0faqx" path="res://scenes/beyblade/beybladeRigid.tscn" id="3_lbhrr"]
@@ -52,6 +53,7 @@ blend_shape_mode = 0
 [node name="Camera3D" type="Camera3D" parent="." unique_id=359013382]
 transform = Transform3D(0.999911, -0.011795826, 0.0062300097, 0.0013727008, 0.5555217, 0.8315009, -0.013269145, -0.8314184, 0.55548847, 0, 25.914715, 32.72343)
 fov = 90.0
+script = ExtResource("1_lbhrr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=111366632]
 transform = Transform3D(1, 0, 0, 0, 0.47869182, 0.87798303, 0, -0.87798303, 0.47869182, 123.73007, 506.1988, 376.87842)
@@ -67,7 +69,7 @@ transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0.026481628, -13.12986,
 mesh = SubResource("BoxMesh_yqjtg")
 
 [node name="BeybladeRed" parent="." unique_id=1487340640 instance=ExtResource("3_lbhrr")]
-transform = Transform3D(0.9140558, 0.39726052, -0.08176759, -0.32694232, 0.84099203, 0.43109283, 0.24002205, -0.36730966, 0.89859504, 0, 4.2777805, 22.70355)
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 4.2777805, 22.70355)
 
 [node name="Cylinder" parent="BeybladeRed/beyblade" parent_id_path=PackedInt32Array(1487340640, 1068453274) index="0" unique_id=2142283817]
 mesh = SubResource("ArrayMesh_lbhrr")
@@ -76,12 +78,11 @@ mesh = SubResource("ArrayMesh_lbhrr")
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 
 [node name="BeybladeBlue" parent="." unique_id=2107056818 instance=ExtResource("3_lbhrr")]
-transform = Transform3D(-0.9440027, 0.3299378, 8.252733e-08, 0.29694387, 0.8496019, 0.4358909, 0.14381681, 0.41148221, -0.8999995, 0, 3.860372, -22.826082)
-coefficientFriction = 0.5
-drag = 1.0
-collisionForceScale = 2.0
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0, 3.860372, -22.826082)
 
 [editable path="BeybladeRed"]
 [editable path="BeybladeRed/beyblade"]
+[editable path="StaticStadium"]
+[editable path="StaticStadium/stadium"]
 [editable path="BeybladeBlue"]
 [editable path="BeybladeBlue/beyblade"]

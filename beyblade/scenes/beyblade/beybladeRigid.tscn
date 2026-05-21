@@ -8,16 +8,17 @@
 [ext_resource type="Shader" uid="uid://dovyba75bt3kp" path="res://shaders/simple_shader2.tres" id="5_cxbsj"]
 [ext_resource type="Script" uid="uid://bv46i2k88tjsu" path="res://scenes/beyblade/hit_effect.gd" id="6_arycd"]
 [ext_resource type="Texture2D" uid="uid://vf0c6d1lldq0" path="res://assets/T_circle42.PNG" id="6_jprnu"]
+[ext_resource type="Script" uid="uid://d3qpa5rtrdv0o" path="res://scenes/beyblade/sound_effect.gd" id="9_gqola"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvyue"]
-friction = 0.5
+friction = 0.1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eu2xk"]
 radius = 1.1811523
 height = 3.1656494
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yp6vj"]
-height = 2.577748
+height = 0.75723
 radius = 4.572754
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yp6vj"]
@@ -91,9 +92,9 @@ can_sleep = false
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_lvyue")
-spinDecay = 50.0
-collisionForceScale = 3.0
-propulsion_strength = 5000.0
+maxSpin = 6000.0
+gyroStrength = 60.0
+propulsion_strength = 6000.0
 
 [node name="beyblade" parent="." unique_id=1068453274 groups=["beyblade"] instance=ExtResource("2_q35t8")]
 
@@ -102,7 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7262573, 0)
 shape = SubResource("CapsuleShape3D_eu2xk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1919846855 groups=["beyblade"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.41594815, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00075277686, 0)
 shape = SubResource("CylinderShape3D_yp6vj")
 
 [node name="groundRay" type="RayCast3D" parent="." unique_id=192276087]
@@ -136,9 +137,17 @@ process_material = SubResource("ParticleProcessMaterial_4yshp")
 draw_pass_1 = SubResource("QuadMesh_60aai")
 script = ExtResource("6_arycd")
 
+[node name="sound effect" type="AudioStreamPlayer3D" parent="hit effects" unique_id=245144441]
+script = ExtResource("9_gqola")
+
 [node name="collision cooldown" type="Timer" parent="." unique_id=597024321]
 wait_time = 0.05
 one_shot = true
+
+[node name="testRay" type="RayCast3D" parent="." unique_id=1975297816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34894085, 0)
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5
 
 [connection signal="timeout" from="collision cooldown" to="." method="_on_collision_cooldown_timeout"]
 
