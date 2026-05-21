@@ -1,6 +1,7 @@
 Beyblade simulator using godot
 
 PHYSICS 
+
 Beyblades represented as RigidBody3D nodes but handle their own spin and collision
 Every physics frame:
   - Desired spin value tracked and decreased gradually
