@@ -82,18 +82,17 @@ func apply_spin_propulsion(delta: float) -> void:
 	if not groundRay.is_colliding():
 		return
 
-	var spin_ratio := spin_speed / maxSpin
+	var spin_ratio := sqrt(spin_speed / maxSpin)
 	if spin_ratio < 0.05:
 		return
 
-	var tilt := basis.y - Vector3.UP
-	tilt.y = 0.0  # only care about horizontal component
+	var tilt := basis.y 
+	tilt.y = 0.0  # only apply force horizontally
 
 	if tilt.length() < 0.001:
 		return
 
-	# Push in the direction the tilt is "leaning" — this creates the
-	# characteristic erratic speeding-around behaviour
+	# Push in the direction of the tilt
 	var thrust := tilt.normalized() * spin_ratio * propulsion_strength * delta
 	apply_central_force(thrust)
 	
@@ -111,7 +110,7 @@ func _on_body_entered(body: Node) -> void:
 	# Faster beyblade pushes the other away more
 	print(name," ", relative_vel, " ")
 	var knockback : Vector3 = impact * collisionForceScale * max(relative_vel, -relative_vel*0.5) * mass
-	knockback.y = clamp(knockback.y, -20.0, 0.0)
+	knockback.y = clamp(knockback.y, -0.1, 0.1)
 		
 	if other.spin_speed >= 0.5:
 		call_deferred("handle_collision", other, knockback) #handles collision on the next frame
@@ -129,7 +128,7 @@ func _ready() -> void:
 	connect("body_entered", _on_body_entered)
 	# Lock Y-position slightly to keep blade on floor plane
 	axis_lock_linear_y = false  # let gravity work naturally
-	linear_velocity = -10* global_position.normalized() + 20*(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized()) 
+	linear_velocity = -10* global_position.normalized() + 50*(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized()) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -140,8 +139,9 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	decay_spin(delta)
 	apply_floor_friction(delta)
-	if spin_speed <= 0.0:
+	if spin_speed <= 100:
 		# Beyblade has stopped let it fall
+		linear_velocity = linear_velocity.lerp(Vector3.ZERO, 0.15)
 		if !lost:
 			lost = true
 			print(name)

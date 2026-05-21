@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://d3qpa5rtrdv0o" path="res://scenes/beyblade/sound_effect.gd" id="9_gqola"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvyue"]
-friction = 0.1
+friction = 0.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eu2xk"]
 radius = 1.1811523
@@ -92,9 +92,11 @@ can_sleep = false
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_lvyue")
-maxSpin = 6000.0
+spinDecay = 25.0
 gyroStrength = 60.0
-propulsion_strength = 6000.0
+coefficientFriction = 0.3
+wobble = 1.0
+collisionForceScale = 2.0
 
 [node name="beyblade" parent="." unique_id=1068453274 groups=["beyblade"] instance=ExtResource("2_q35t8")]
 
@@ -107,7 +109,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00075277686, 0)
 shape = SubResource("CylinderShape3D_yp6vj")
 
 [node name="groundRay" type="RayCast3D" parent="." unique_id=192276087]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7576096, 0)
+transform = Transform3D(1, 0, 0, 0, 0.64068264, 0, 0, 0, 1, 0, -1.7576096, 0)
 
 [node name="topRay" type="RayCast3D" parent="." unique_id=1164191192]
 transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0.5623239, 0)
